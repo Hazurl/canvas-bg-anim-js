@@ -11,3 +11,8 @@ Some animations in pure js, using html5 canvas.
 > Highlight any element referenced by the class 'box' and under the mouse pointer
 
 [Test it here](https://hazurl.github.io/canvas-bg-anim-js/html/highlighted_boxes.html)
+
+## Meteor particles
+> Meteor shower
+
+[Test it here](https://hazurl.github.io/canvas-bg-anim-js/html/meteors.html)
