@@ -70,14 +70,14 @@
     }
 
     function create_star() {
-        let star = new Star(Math.random() * ca.width, Math.random() * ca.height, Math.random() * 2, '#FFC31E', '#FFC31EAA');
+        let star = new Star(Math.random() * ca.width, Math.random() * ca.height, Math.random() * 2.5, '#FFC31E88', '#FFC31E66');
         return star;
     }
 
     for(let i = 0; i < 20; i++) 
         objects.push(create_comet());
 
-    for(let i = 0; i < 20; i++) 
+    for(let i = 0; i < 30; i++) 
         objects.push(create_star());
 
     canvas_anim_exported.set_update_cb(() => {
