@@ -7,12 +7,18 @@ const canvas_anim_exported = new (function() {
     this.height = this.canvas.height = window.innerHeight;
     this.screen_bounds = () => { return { x : 0, y : 0, w : this.width, h : this.height }; };
 
+    this.MOUSE_BUT_LEFT = 0;
+    this.MOUSE_BUT_MIDDLE = 1;
+    this.MOUSE_BUT_RIGHT = 2;
+
+    this.mouse_buttons = [0, 0, 0];
     this.mouse = {
         x : -1, y : -1,
         is_defined() { return this.x != -1; }
     };
 
     this.clear_color = '#ffffff';
+    this._clear_rect = true;
 
     this.start_time = Date.now() / 1000;
     this.time = 0;
@@ -116,6 +122,7 @@ const canvas_anim_exported = new (function() {
 
         if (this._update_cb) this._update_cb(); 
         
+        if (this._clear_rect)
         this.context.clearRect(0, 0, this.width, this.height);
         this.context.fillStyle = this.clear_color;
         this.context.fillRect(0, 0, this.width, this.height);
@@ -134,14 +141,30 @@ const canvas_anim_exported = new (function() {
     window.addEventListener('mousemove', (e) => {
         this.mouse.x = e.x;
         this.mouse.y = e.y;
-    })
+    }),
+
+    document.body.addEventListener('mousedown', (e) => {
+        if (this._button_down_cb && this.mouse_buttons[e.button] == 0) this._button_down_cb(e.button);
+        this.mouse_buttons[e.button]++;
+    });
+
+    document.body.addEventListener('mouseup', (e) => {
+        this.mouse_buttons[e.button]--;
+        if (this._button_up_cb && this.mouse_buttons[e.button] == 0) this._button_up_cb(e.button);
+    });
 
     // user setters
     this.set_update_cb = (f) => { this._update_cb = f; };
     this.set_draw_cb = (f) => { this._draw_cb = f; };
     this.set_resize_cb = (f) => { this._resize_cb = f; };
+    this.set_button_up_cb = (f) => { this._button_up_cb = f; };
+    this.set_button_down_cb = (f) => { this._button_down_cb = f; };
 
     this.set_clear_color = (c) => { this.clear_color = c; };
+    this.use_clear_rect = (enable) => { this._clear_rect = enable; }
+
+    // disable right click
+    document.body.oncontextmenu= () => { return false; };
 
     // start coroutines
     this._update();
