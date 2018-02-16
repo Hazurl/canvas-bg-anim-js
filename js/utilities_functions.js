@@ -103,6 +103,7 @@ const canvas_anim_exported = new (function() {
 
         if (this._update_cb) this._update_cb(); 
         
+        this.context.clearRect(0, 0, this.width, this.height);
         this.context.fillStyle = this.clear_color;
         this.context.fillRect(0, 0, this.width, this.height);
         
