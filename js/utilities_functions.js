@@ -145,11 +145,11 @@ const canvas_anim_exported = new (function() {
 
     document.body.addEventListener('mousedown', (e) => {
         if (this._button_down_cb && this.mouse_buttons[e.button] == 0) this._button_down_cb(e.button);
-        this.mouse_buttons[e.button]++;
+        this.mouse_buttons[e.button] = 1;
     });
 
     document.body.addEventListener('mouseup', (e) => {
-        this.mouse_buttons[e.button]--;
+        this.mouse_buttons[e.button] = 0;
         if (this._button_up_cb && this.mouse_buttons[e.button] == 0) this._button_up_cb(e.button);
     });
 

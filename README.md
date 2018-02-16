@@ -20,4 +20,4 @@ Some animations in pure js, using html5 canvas.
 ## Magnetic particles
 > Particles converge on the mouse, an explosion occur when the left mouse button is pressed
 
-[Test it here](https://hazurl.github.io/canvas-bg-anim-js/html/attarction.html)
+[Test it here](https://hazurl.github.io/canvas-bg-anim-js/html/attraction.html)
