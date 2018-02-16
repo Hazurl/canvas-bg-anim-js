@@ -10,7 +10,7 @@
             this.ball = new primitives.Circle(x, y, 5, '#ffffffff');
             this.oldy = y;
             this.dy = 0;
-            this.ball.vx = 900;
+            this.ball.vx = Math.random() * 400 + 700;
             this.ball.vy = -150;
             this.ball.set_force('gravity', [0, 150]);
         }
