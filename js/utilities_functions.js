@@ -28,14 +28,27 @@ const canvas_anim_exported = new (function() {
             this.vy = vy;
             this.ax = ax;
             this.ay = ay;
+
+            this.forces = new Map();
+        }
+
+        set_force(name, value) {
+            this.forces.set(name, value);
         }
 
         update(dt) {
-            this.x += this.ax*dt*dt/2 + this.vx*dt;
-            this.vx += this.ax*dt;
+            let ax = this.ax;
+            let ay = this.ay;
+            for(let f of this.forces) {
+                let [, [x, y]] = f;
+                ax += x;
+                ay += y;
+            }
+            this.x += ax*dt*dt/2 + this.vx*dt;
+            this.vx += ax*dt;
 
-            this.y += this.ay*dt*dt/2 + this.vy*dt;
-            this.vy += this.ay*dt;
+            this.y += ay*dt*dt/2 + this.vy*dt;
+            this.vy += ay*dt;
         }
 
         bounds() {
