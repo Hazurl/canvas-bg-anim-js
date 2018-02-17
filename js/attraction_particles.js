@@ -14,8 +14,8 @@
     let radius = 2;
     let dispersal = 300;
     let range = 100;
-    let range_explosion = 800;
-    let force = 400;
+    let range_explosion = 1800;
+    let force = 800;
     let explosion_force = 200;
 
     let colors = [
