@@ -115,6 +115,9 @@
     let particles_count = 30;
 
     function set_target_to(box) {
+        if(target_box!==null){
+            return;
+        }
         target_box = box;
         let path = create_path_around(target_box, 10);
         particles = [];
