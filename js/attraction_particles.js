@@ -67,6 +67,17 @@
                 o.ax *= norm * force;
                 o.ay *= norm * force;
             }
+            else{
+                o.ax = o.vx * -0.5 + Math.random() * dispersal - dispersal / 2;
+                o.ay = o.vy * -0.5 + Math.random() * dispersal - dispersal / 2;
+                let size = Math.sqrt(o.ax * o.ax + o.ay * o.ay);
+                if (size != 0) {
+                    o.ax /= size;
+                    o.ay /= size;
+                }
+                o.ax *= force;
+                o.ay *= force;
+            }
             o.update(ca.dt);
 
             if (o.x > max_x) o.x = max_x;
