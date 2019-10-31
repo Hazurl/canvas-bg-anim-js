@@ -49,24 +49,36 @@
 
     canvas_anim_exported.set_update_cb(() => {
         for(let o of objects) {
-            if (ca.mouse.is_defined()) {
-                let dx = ca.mouse.x - o.x;
-                let dy = ca.mouse.y - o.y;
+
+            let apply_force = (dx, dy, norm) => {
                 o.ax = o.vx * -0.5 + dx * 2 + Math.random() * dispersal - dispersal / 2;
                 o.ay = o.vy * -0.5 + dy * 2 + Math.random() * dispersal - dispersal / 2;
+
                 let size = Math.sqrt(o.ax * o.ax + o.ay * o.ay);
                 if (size != 0) {
                     o.ax /= size;
                     o.ay /= size;
                 }
 
-                let d = Math.sqrt(dx * dx + dy * dy) / range;
-                if(d < 1) d = 1;
-                let norm = 1 / d;
-
                 o.ax *= norm * force;
                 o.ay *= norm * force;
+            };
+
+            if (ca.mouse.is_defined()) {
+                let dx = ca.mouse.x - o.x;
+                let dy = ca.mouse.y - o.y;
+
+                let d = Math.sqrt(dx * dx + dy * dy) / range;
+                if(d < 1) d = 1;
+
+                apply_force(dx, dy, 1 / d);
             }
+            else{
+                apply_force(0, 0, 1);
+            }
+
+
+            
             o.update(ca.dt);
 
             if (o.x > max_x) o.x = max_x;
